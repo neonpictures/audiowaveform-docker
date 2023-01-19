@@ -35,7 +35,7 @@ ENV PREFIX=/usr/local
 
 RUN mkdir -p ${SHARED_DIR}/lib
 RUN ldd ${PREFIX}/bin/audiowaveform | cut -d ' ' -f 3 | strings | xargs -I R cp R ${SHARED_DIR}/lib/
-RUN for lib in ${SHARED_DIR}/lib/*; do strip --strip-all $lib; done
+# RUN for lib in ${SHARED_DIR}/lib/*; do strip --strip-all $lib; done
 RUN cp -r ${PREFIX}/bin ${SHARED_DIR}/bin/
 RUN cp -r ${PREFIX}/share ${SHARED_DIR}/share/
 RUN cp -r ${PREFIX}/include ${SHARED_DIR}/include
