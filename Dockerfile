@@ -27,3 +27,16 @@ RUN git clone -n https://github.com/bbc/audiowaveform.git && \
     make -j $(nproc) && \
     make install && \
     strip /usr/local/bin/audiowaveform
+
+
+# copy ffmbc shared dependencies to /tmp/fakeroot
+ENV SHARED_DIR=/tmp/fakeroot
+ENV PREFIX=/usr/local
+
+RUN \
+  mkdir -p ${SHARED_DIR}/lib  && \
+  ldd ${PREFIX}/bin/audiowaveform | cut -d ' ' -f 3 | strings | xargs -I R cp R ${SHARED_DIR}/lib/ && \
+  for lib in ${SHARED_DIR}/lib/*; do strip --strip-all $lib; done && \
+  cp -r ${PREFIX}/bin ${SHARED_DIR}/bin/ && \
+  cp -r ${PREFIX}/share ${SHARED_DIR}/share/ && \
+  cp -r ${PREFIX}/include ${SHARED_DIR}/include
