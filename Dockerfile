@@ -3,7 +3,7 @@
 FROM alpine as audiowaveform-builder
 
 RUN apk add --no-cache boost-dev boost-static cmake curl g++ gcc gd-dev git \
-    jq libid3tag-dev libmad-dev libpng-static libsndfile-dev libvorbis-static make zlib-static libsndfile1
+    jq libid3tag-dev libmad-dev libpng-static libsndfile libsndfile-dev libvorbis-static make zlib-static
 
 RUN apk add --no-cache autoconf automake libtool gettext && \
     curl -fL# "$(curl -s 'https://api.github.com/repos/xiph/flac/tags' | jq -r '. | first | .tarball_url')" -o flac.tar.gz && \
