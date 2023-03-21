@@ -1,6 +1,6 @@
 # from https://github.com/realies/audiowaveform-docker/blob/master/Dockerfile
 
-FROM alpine as audiowaveform-builder
+FROM ruby:3.0.5-alpine as audiowaveform-builder
 
 RUN apk add --no-cache boost-dev boost-static cmake curl g++ gcc gd-dev git \
     jq libid3tag-dev libmad-dev libpng-static libsndfile-dev libvorbis-static make zlib-static
